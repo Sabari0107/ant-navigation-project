@@ -55,9 +55,8 @@ class NavigationAnimator:
         rover_marker, = ax.plot([], [], 'ro', markersize=12, label='Rover')
         home_marker, = ax.plot([0], [0], 'g*', markersize=20, label='Home')
         
-        # Home vector arrow
-        home_arrow = ax.arrow(0, 0, 0, 0, head_width=1, head_length=0.5,
-                             fc='red', ec='red', linewidth=2, alpha=0.6)
+        # Home vector arrow - initialize as None
+        home_arrow = None
         
         # Sun direction
         sun_angle = np.deg2rad(self.sun_azimuth)
@@ -93,6 +92,8 @@ class NavigationAnimator:
         
         def animate(frame):
             """Update animation for each frame."""
+            nonlocal home_arrow  # Access outer scope variable
+            
             # Update path line
             path_line.set_data(self.path[:frame+1, 0], self.path[:frame+1, 1])
             
@@ -104,9 +105,12 @@ class NavigationAnimator:
                 hv = self.rover.home_vector_history[frame]
                 pos = self.path[frame]
                 
-                # Remove old arrow
-                nonlocal home_arrow
-                home_arrow.remove()
+                # Remove old arrow if it exists
+                if home_arrow is not None:
+                    try:
+                        home_arrow.remove()
+                    except:
+                        pass  # Ignore if already removed
                 
                 # Draw new arrow
                 if np.linalg.norm(hv) > 0.1:
@@ -136,8 +140,12 @@ class NavigationAnimator:
         
         # Save animation
         print(f"Creating animation... This may take a minute.")
-        anim.save(save_path, writer='pillow', fps=fps, dpi=100)
-        print(f"Animation saved to: {save_path}")
+        try:
+            anim.save(save_path, writer='pillow', fps=fps, dpi=100)
+            print(f"✓ Animation saved to: {save_path}")
+        except Exception as e:
+            print(f"✗ Error saving animation: {e}")
+            print("  Try installing pillow: pip install pillow")
         
         plt.close()
 
