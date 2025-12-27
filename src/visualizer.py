@@ -1,8 +1,3 @@
-"""
-visualizer.py - Animation Creator for Rover Navigation
-Creates animated GIF showing the rover's movement in real-time.
-"""
-
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation

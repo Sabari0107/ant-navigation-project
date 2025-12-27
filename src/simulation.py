@@ -1,9 +1,3 @@
-"""
-simulation.py - Main Simulation Runner
-This script runs multiple simulations of ant-inspired navigation with different
-parameters to demonstrate the robustness of path integration.
-"""
-
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation

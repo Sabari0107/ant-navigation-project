@@ -1,9 +1,3 @@
-"""
-sensor.py - Polarized Light Sensor Simulation
-This module simulates a polarized light sensor that detects sun direction
-similar to how desert ants use polarized skylight patterns for navigation.
-"""
-
 import numpy as np
 
 class PolarizedLightSensor:

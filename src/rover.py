@@ -1,9 +1,3 @@
-"""
-rover.py - Desert Ant-Inspired Rover Robot
-This module implements a rover that uses path integration for navigation,
-mimicking the remarkable navigation abilities of Cataglyphis desert ants.
-"""
-
 import numpy as np
 from sensor import PolarizedLightSensor
 
